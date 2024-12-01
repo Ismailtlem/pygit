@@ -1,6 +1,12 @@
 import os
+from typing import (
+    Literal,
+)
 
 import click
+
+# from commands.hash_object import hash_git_object
+from commands.init import init_repo
 
 
 @click.group()
@@ -11,28 +17,15 @@ def cli() -> None:
 
 
 @cli.command(name="init", help="init an empty git repository")
-def init():
+def init() -> Literal["hello"]:
     """Command description goes here."""
-    DIRECTORY_NAME = ".git"
-    DIRS_LIST = ["hooks", "info", "objects", "refs"]
-    try:
-        os.mkdir(f"{DIRECTORY_NAME}")
-        print(f"Directory '{DIRECTORY_NAME}' created successfully.")
-    except FileExistsError:
-        print(f"Directory '{DIRECTORY_NAME}' already exists.")
-    except PermissionError:
-        print(f"Permission denied: Unable to create '{DIRECTORY_NAME}'.")
-    # for file in FILES_LIST:
-    with open(f"{DIRECTORY_NAME}/HEAD", "w") as f:
-        f.write("ref: refs/heads/master")
-    with open(f"{DIRECTORY_NAME}/config", "w") as f:
-        f.write("")
-    with open(f"{DIRECTORY_NAME}/description", "w") as f:
-        f.write(
-            "Unnamed repository; edit this file 'description' to name the repository."
-        )
-
-    for folder in DIRS_LIST:
-        os.mkdir(f"{DIRECTORY_NAME}/{folder}")
-
+    init_repo()
     return "hello"
+
+
+# @cli.command(name="hash_object", help="init an empty git repository")
+# @click.argument("file", type=click.File("r"))
+# def hash_object(file: str) -> None:
+#     """Command description goes here."""
+#     with open(file, "rb") as f:
+#         print(hash_git_object(f.read()))
