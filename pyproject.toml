@@ -3,13 +3,9 @@ name = "pygit"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
-authors = [
-    { name = "Ismail", email = "ismail@ismailtlemcani.com" }
-]
+authors = [{ name = "Ismail", email = "ismail@ismailtlemcani.com" }]
 requires-python = ">=3.12"
-dependencies = [
-    "click>=8.1.7",
-]
+dependencies = ["click>=8.1.7"]
 
 [build-system]
 requires = ["setuptools>=61"]
@@ -17,3 +13,26 @@ build-backend = "setuptools.build_meta"
 
 [project.scripts]
 pygit = "pygit.cli:cli"
+
+[tool.ruff]
+line-length = 100
+
+exclude = [
+    ".eggs",
+    ".git",
+    ".hg",
+    ".mypy_cache",
+    ".ruff_cache",
+    ".venv",
+    "__pypackages__",
+    "_build",
+    "venv",
+]
+
+[tool.ruff.lint]
+select = [
+    "ALL", # all rules
+]
+
+[tool.ruff.lint.isort]
+lines-after-imports = 2
